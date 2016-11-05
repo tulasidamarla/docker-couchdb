@@ -65,7 +65,7 @@ RUN apt-get update -y -qq && apt-get install -y --no-install-recommends \
  && curl -fSL https://dist.apache.org/repos/dist/release/couchdb/source/2.0.0/apache-couchdb-$COUCHDB_VERSION.tar.gz -o couchdb.tar.gz \
  && tar -xzf couchdb.tar.gz -C couchdb --strip-components=1 \
  && cd couchdb \
- && mv /tmp/chttpd_db.erl src/chttpd/src/chttpd_db.erl \
+ && mv /tmp/chttpd_db.erl /usr/src/couchdb/src/chttpd/src/chttpd_db.erl \
  # Build the release and install into /opt
  && ./configure --disable-docs \
  && make release \
