@@ -1,5 +1,4 @@
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
-
 # use this file except in compliance with the License. You may obtain a copy of
 # the License at
 #
@@ -45,6 +44,8 @@ RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364
 
 ENV COUCHDB_VERSION 2.0.0
 
+COPY chttpd_db.erl /tmp/
+
 # Download dev dependencies
 RUN apt-get update -y -qq && apt-get install -y --no-install-recommends \
     apt-transport-https \
@@ -61,9 +62,10 @@ RUN apt-get update -y -qq && apt-get install -y --no-install-recommends \
  && npm install -g grunt-cli \
  # Acquire CouchDB source code
  && cd /usr/src && mkdir couchdb \
- && curl -fSL https://s3-us-west-2.amazonaws.com/gratico-production-cdn/devops/vendor/couchdb/source/apache-couchdb-$COUCHDB_VERSION.tar.gz -o couchdb.tar.gz \
- && tar -xzf couchdb.tar.gz -C couchdb  \
+ && curl -fSL https://dist.apache.org/repos/dist/release/couchdb/source/2.0.0/apache-couchdb-$COUCHDB_VERSION.tar.gz -o couchdb.tar.gz \
+ && tar -xzf couchdb.tar.gz -C couchdb --strip-components=1 \
  && cd couchdb \
+ && mv /tmp/chttpd_db.erl /src/chttpd/src/chttpd_db.erl \
  # Build the release and install into /opt
  && ./configure --disable-docs \
  && make release \
