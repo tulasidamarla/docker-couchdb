@@ -61,7 +61,7 @@ RUN apt-get update -y -qq && apt-get install -y --no-install-recommends \
  && npm install -g grunt-cli \
  # Acquire CouchDB source code
  && cd /usr/src && mkdir couchdb \
- && curl -fSL https://dist.apache.org/repos/dist/dev/couchdb/source/2.0.0/rc.1/apache-couchdb-$COUCHDB_VERSION.tar.gz -o couchdb.tar.gz \
+ && curl -fSL https://s3-us-west-2.amazonaws.com/gratico-production-cdn/devops/vendor/couchdb/source/apache-couchdb-$COUCHDB_VERSION.tar.gz -o couchdb.tar.gz \
  && tar -xzf couchdb.tar.gz -C couchdb --strip-components=1 \
  && cd couchdb \
  # Build the release and install into /opt
