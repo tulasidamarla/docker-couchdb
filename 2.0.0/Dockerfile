@@ -62,7 +62,7 @@ RUN apt-get update -y -qq && apt-get install -y --no-install-recommends \
  # Acquire CouchDB source code
  && cd /usr/src && mkdir couchdb \
  && curl -fSL https://s3-us-west-2.amazonaws.com/gratico-production-cdn/devops/vendor/couchdb/source/apache-couchdb-$COUCHDB_VERSION.tar.gz -o couchdb.tar.gz \
- && tar -xzf couchdb.tar.gz -C couchdb --strip-components=1 \
+ && tar -xzf couchdb.tar.gz -C couchdb  \
  && cd couchdb \
  # Build the release and install into /opt
  && ./configure --disable-docs \
